@@ -13,18 +13,19 @@ const getalldiscussion =async (req, res) => {
 
 const creatediscussion = async (req, res) => {
 
-    Discussion.create(req.body).then((discussion)=> {
-        res.status(200).json({
-            "message": 'Discussion added successfully',
-            "discussion_id": discussion._id,
-            "status": 'success'
-        });
-    }).catch((err) => {
+    try{
+    const discussion = await Discussion.create(req.body);
+    res.status(200).json({
+        "message": 'Discussion added successfully',
+        "discussion_id": discussion._id,
+        "status": 'success'
+    });
+    }catch(err){
         res.status(404).json({
             "status": 'fail',
             "message": err.message
         });
-    });
+    }
 }
 
 /*

@@ -1,40 +1,39 @@
-const Discussion   = require("../models/Discussion.js");
+const Discussion   = require("../models/discussion.js");
 
 
-const getalldiscussion =async (req, res) => {
+const getAllDiscussion =async (req, res) => {
 
-    const all_discussion = await Discussion.find({});
+    const allDiscussion = await Discussion.find({});
     res.status(200).json({
-        "status": "success",
-        "data": all_discussion
+        status: 'success',
+        data: allDiscussion
     })
    
 }
 
-const creatediscussion = async (req, res) => {
+const createDiscussion = async (req, res) => {
 
     try{
     const discussion = await Discussion.create(req.body);
     res.status(200).json({
-        "message": 'Discussion added successfully',
-        "discussion_id": discussion._id,
-        "status": 'success'
+        message: 'Discussion added successfully',
+        discussion_id: discussion._id,
+        status: 'success'
     });
     }catch(err){
-        res.status(404).json({
-            "status": 'fail',
-            "message": err.message
+        res.status(500).json({
+            status: 'fail',
+            message: err.message
         });
     }
 }
 
 /*
 
-Taskdelete Controller
+deletediscussion Controller
 
-/api/v1/discussion/delete/:id
 
-1. delete the discussion with given id in req.params.
+2. delete the discussion with given id in req.params.
 
 Response --> 
 
@@ -48,26 +47,27 @@ json = {
 
 2. Discussion Doesnot exist
 
-403 Status Code
+404 Status Code
 json = {
-    "status": 'fail',
-    "message": 'Given Discussion doesnot exist'
+    status: 'fail',
+    message: 'Given Discussion doesn't exist'
 }
 
 3. Something went wrong
 
-404 Status Code
+500 Status Code
 json = {
-    "status": 'fail',
-    "message": error message
+    status: 'fail',
+    message: error message
 }
 
 */
 
-const deletediscussion = async (req, res) => {
+const deleteDiscussion = async (req, res) => {
+
 
     //Write your code here.
 
 }
 
-module.exports = { getalldiscussion, creatediscussion, deletediscussion };
+module.exports = { getAllDiscussion, createDiscussion, deleteDiscussion };
